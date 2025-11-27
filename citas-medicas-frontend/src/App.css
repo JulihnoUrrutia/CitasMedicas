@@ -1,0 +1,82 @@
+body {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+  margin: 0;
+  padding: 0;
+}
+
+.dashboard-container {
+  text-align: center;
+  padding: 30px;
+}
+
+.titulo {
+  color: #1e88e5;
+  margin-bottom: 20px;
+}
+
+.contenido-dashboard {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 30px;
+  margin: 0 10%;
+}
+
+.card-form {
+  background: white;
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.card-form input, .card-form select, .card-form button {
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+.card-form button {
+  background-color: #1e88e5;
+  color: white;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.card-form button:hover {
+  background-color: #1565c0;
+}
+
+.lista-citas {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+}
+
+.card-cita {
+  background: white;
+  border-radius: 12px;
+  padding: 15px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+  transition: transform 0.2s;
+}
+
+.card-cita:hover {
+  transform: scale(1.03);
+}
+
+.card-cita button {
+  background-color: #e53935;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.mensaje-vacio {
+  color: #555;
+  font-style: italic;
+}

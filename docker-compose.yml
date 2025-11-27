@@ -1,0 +1,60 @@
+version: '3.8'
+
+services:
+  # Base de datos MySQL
+  database:
+    image: mysql:8.0
+    container_name: citas-medicas-db
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: citas_medicas
+      MYSQL_USER: app_user
+      MYSQL_PASSWORD: app_password
+    ports:
+      - "3307:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - citas-network
+
+  # Backend Node.js
+  backend:
+    build: ./citas-medicas-backend
+    container_name: citas-medicas-backend
+    restart: unless-stopped
+    ports:
+      - "3000:3000"  # Ajusta según tu server.js
+    environment:
+      - DB_HOST=database
+      - DB_USER=app_user
+      - DB_PASSWORD=app_password
+      - DB_NAME=citas_medicas
+      - DB_PORT=3306
+      - NODE_ENV=production
+    depends_on:
+      - database
+    networks:
+      - citas-network
+
+  # Frontend React con Vite
+  frontend:
+    build: ./citas-medicas-frontend
+    container_name: citas-medicas-frontend
+    restart: unless-stopped
+    ports:
+      - "4173:80"  # Si usas nginx en producción
+      # - "5173:5173"  # Si usas Vite dev server
+    environment:
+      - VITE_API_URL=http://localhost:3000
+    depends_on:
+      - backend
+    networks:
+      - citas-network
+
+volumes:
+  db_data:
+
+networks:
+  citas-network:
+    driver: bridge
